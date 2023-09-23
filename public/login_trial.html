@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            background: linear-gradient(90deg, #007BFF, #00BFFF);
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background: linear-gradient(to bottom, #007bff, #0056b3) no-repeat center center fixed; background-size: cover;">
+    
+        <div class="container d-flex justify-content-center align-items-center vh-100">
+            <div class="card p-4" style="width: 400px;">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Login</h2>
+                    <form>
+                        <div class="mb-3">
+                            <div class="card">
+                                <div class="card-header">Login with Metamask</div>
+                                <div class="card-body">
+                                    <p>Click the button below to authenticate with your Metamask wallet:</p>
+                                    <button id="loginButton" class="btn btn-primary">Login with Metamask</button>
+                                </div>
+                            </div>
+                            <a href="/public/trial.html" class="btn btn-primary">Go to home</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script>
+
+        async function loginWithMetamask() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                    if (accounts.length > 0) {
+                        
+                        alert(`Logged in with wallet address: ${accounts[0]}`);
+                        
+                    } else {
+                        alert('Metamask login failed. Please connect your wallet.');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('Metamask login failed. Please check your Metamask setup.');
+                }
+            } else {
+                alert('Metamask is not installed. Please install Metamask to proceed.');
+            }
+        }
+
+
+        document.getElementById('loginButton').addEventListener('click', loginWithMetamask);
+    </script>
+</body>
+</html>
